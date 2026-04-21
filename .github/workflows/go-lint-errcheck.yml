@@ -24,11 +24,12 @@ jobs:
         run: go install github.com/kisielk/errcheck@latest
 
       - name: Run errcheck
+        env:
+          EXCLUDE: ${{ inputs.errcheck-excludes-file }}
         run: |
-          if ${{ inputs.errcheck-excludes-file != '' }}; then
-            option_errcheck_exclude="-exclude ${{ inputs.errcheck-excludes-file }}"
+          if [ -z "$EXCLUDE" ]; then
+            errcheck ./...
           else
-            option_errcheck_exclude=''
+            errcheck -exclude "$EXCLUDE" ./...
           fi
-          errcheck $option_errcheck_exclude ./...
 
