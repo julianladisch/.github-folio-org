@@ -19,6 +19,3 @@ jobs:
 
       - name: actionlint
         uses: raven-actions/actionlint@v2
-        with:
-          # overly pedantic quoting requirements
-          flags: -ignore SC2046 -ignore SC2086
